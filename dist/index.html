@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo List</title>
+  <script src="./main.js" defer></script>
+</head>
+
+<body>
+  <div class="page-structure">
+    <header class="header">
+      <div>
+        <a href="./index.html">
+          <svg class="logo" width="60px" height="52px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#fff" fill-rule="evenodd" d="M4,4 L9,4 C9.55228,4 10,3.55228 10,3 C10,2.44772 9.55228,2 9,2 L4,2 C2.89543,2 2,2.89543 2,4 L2,12 C2,13.1046 2.89543,14 4,14 L12,14 C13.1046,14 14,13.1046 14,12 L14,10 C14,9.44771 13.5523,9 13,9 C12.4477,9 12,9.44771 12,10 L12,12 L4,12 L4,4 Z M15.2071,2.29289 C14.8166,1.90237 14.1834,1.90237 13.7929,2.29289 L8.5,7.58579 L7.70711,6.79289 C7.31658,6.40237 6.68342,6.40237 6.29289,6.79289 C5.90237,7.18342 5.90237,7.81658 6.29289,8.20711 L7.79289,9.70711 C7.98043,9.89464 8.23478,10 8.5,10 C8.76522,10 9.01957,9.89464 9.20711,9.70711 L15.2071,3.70711 C15.5976,3.31658 15.5976,2.68342 15.2071,2.29289 Z" />
+          </svg>
+        </a>
+      </div>
+      <ul>
+        <li>
+          <svg class="add-task" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 485 485" style="enable-background:new 0 0 485 485;" xml:space="preserve">
+            <polygon points="485,227.5 257.5,227.5 257.5,0 227.5,0 227.5,227.5 0,227.5 0,257.5 227.5,257.5 227.5,485 257.5,485 257.5,257.5 485,257.5 " />
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+          </svg>
+        </li>
+        <li>
+          <svg class="notifications" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 207.948 207.948" style="enable-background:new 0 0 207.948 207.948;" xml:space="preserve">
+            <g>
+              <g>
+                <g id="_x3C_Compound_Path_x3E__1_">
+                  <g>
+                    <g>
+                      <path style="fill:#fff;" d="M104.591,207.474c-14.963,0-27.911-13.643-32.006-33.409H4.286c-1.714,0-3.271-1.024-3.94-2.605
+						c-0.676-1.578-0.344-3.403,0.845-4.653c4.406-4.606,8.6-8.181,12.304-11.338c9.101-7.759,14.598-12.444,14.598-24.54V90.918
+						c0.179-34.429,23.098-65.056,54.91-73.978c1.542-6.993,7.136-16.466,20.965-16.466c13.686,0,19.347,9.777,20.936,16.924
+						c31.988,8.954,55.018,39.392,55.182,73.506v41.343c0,11.724,4.864,15.697,13.675,22.894c3.887,3.171,8.285,6.764,12.995,11.671
+						c1.185,1.242,1.525,3.071,0.845,4.653c-0.673,1.578-2.226,2.605-3.94,2.605h-67.071
+						C132.495,193.832,119.554,207.474,104.591,207.474z M81.776,175.608c3.837,13.757,12.938,23.291,22.815,23.291
+						c9.874,0,18.968-9.534,22.808-23.291H81.776z M15.001,165.487h177.826c-1.553-1.321-3.056-2.548-4.481-3.704
+						c-9.398-7.677-16.824-13.739-16.824-29.536V90.918c-0.15-31.168-21.767-58.901-51.407-65.908
+						c-1.829-0.433-3.16-2.008-3.293-3.883c-0.086-1.21-1.288-12.082-12.848-12.082c-11.9,0-12.794,10.368-12.848,11.556
+						c-0.1,1.904-1.446,3.511-3.3,3.944C58.352,31.502,36.84,59.428,36.679,90.943v39.99c0,16.055-8.167,23.008-17.619,31.068
+						C17.761,163.1,16.401,164.26,15.001,165.487z" />
+                    </g>
+                  </g>
+                </g>
+                <g>
+                  <g>
+                    <path style="fill:#010002;" d="M126.823,26.746c-0.412,0-0.834-0.061-1.249-0.19c-22.74-6.921-41.497-1.117-41.686-1.056
+					c-2.269,0.716-4.66-0.53-5.383-2.777c-0.723-2.251,0.512-4.66,2.759-5.383c0.862-0.279,21.376-6.721,46.804,1.016
+					c2.265,0.684,3.539,3.081,2.856,5.347C130.359,25.554,128.655,26.746,126.823,26.746z" />
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+          </svg>
+        </li>
+        <li>
+          <svg class="color-theme" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 612.001 612.001" style="enable-background:new 0 0 612.001 612.001;" xml:space="preserve">
+            <g>
+              <g>
+                <path d="M306,149.341c-86.382,0-156.661,70.278-156.661,156.661c0,86.382,70.278,156.66,156.661,156.66
+			s156.66-70.278,156.66-156.66C462.66,219.618,392.382,149.341,306,149.341z" />
+                <path d="M274.194,117.278h63.612c5.032,0,9.356-2.101,11.863-5.763c2.508-3.662,2.9-8.453,1.079-13.146L315.749,8.257
+			c-2.789-7.184-7.305-8.256-9.749-8.256s-6.96,1.073-9.749,8.255l-35,90.114c-1.821,4.692-1.427,9.482,1.079,13.145
+			C264.837,115.178,269.162,117.278,274.194,117.278z" />
+                <path d="M337.806,494.723h-63.612c-5.032,0-9.357,2.102-11.863,5.764c-2.506,3.663-2.9,8.453-1.079,13.145l34.999,90.114
+			c2.789,7.182,7.305,8.254,9.749,8.254c2.444,0,6.96-1.072,9.749-8.254l34.999-90.115c1.821-4.69,1.429-9.48-1.079-13.144
+			C347.162,496.825,342.838,494.723,337.806,494.723z" />
+                <path d="M127.54,190.824c2.412,5.477,7.028,8.746,12.348,8.746c3.644,0,7.257-1.608,10.174-4.526l44.981-44.98
+			c3.558-3.558,5.13-8.102,4.312-12.466c-0.819-4.362-3.928-8.028-8.532-10.056l-88.467-38.973c-2.233-0.983-4.336-1.482-6.25-1.482
+			c-3.201,0-5.959,1.415-7.568,3.882c-1.357,2.081-2.454,5.747,0.031,11.389L127.54,190.824z" />
+                <path d="M484.46,421.178c-2.412-5.477-7.027-8.746-12.346-8.746c-3.645,0-7.259,1.609-10.177,4.527l-44.981,44.98
+			c-3.558,3.559-5.13,8.104-4.312,12.466c0.818,4.362,3.929,8.028,8.532,10.055l88.466,38.974c2.233,0.983,4.336,1.482,6.25,1.482
+			c3.201,0,5.959-1.417,7.568-3.882c1.358-2.083,2.455-5.748-0.03-11.389L484.46,421.178z" />
+                <path d="M461.937,195.044c2.918,2.918,6.532,4.526,10.176,4.526c5.319,0,9.934-3.269,12.348-8.746l38.972-88.465
+			c2.486-5.643,1.389-9.308,0.031-11.389c-1.609-2.467-4.367-3.882-7.568-3.882c-1.914,0-4.017,0.499-6.251,1.483l-88.466,38.97
+			c-4.604,2.029-7.715,5.694-8.532,10.057c-0.818,4.363,0.754,8.908,4.312,12.466L461.937,195.044z" />
+                <path d="M150.063,416.959c-2.918-2.918-6.532-4.527-10.177-4.527c-5.319,0-9.934,3.269-12.346,8.746l-38.972,88.465
+			c-2.486,5.643-1.389,9.308-0.031,11.39c1.609,2.466,4.368,3.882,7.568,3.882c1.914,0,4.017-0.499,6.251-1.484l88.466-38.972
+			c4.604-2.028,7.715-5.694,8.532-10.056c0.818-4.362-0.753-8.907-4.312-12.466L150.063,416.959z" />
+                <path d="M603.745,296.251l-90.111-34.996c-1.942-0.755-3.896-1.137-5.806-1.137c-7.593,0-13.104,5.921-13.104,14.078l0.001,63.613
+			c0,8.157,5.511,14.078,13.104,14.078c1.912,0,3.866-0.382,5.806-1.136l90.112-34.999c7.182-2.79,8.254-7.306,8.254-9.751
+			C612.001,303.558,610.926,299.04,603.745,296.251z" />
+                <path d="M104.173,351.886c7.594,0,13.106-5.921,13.106-14.078v-63.613c0-8.157-5.511-14.078-13.106-14.078
+			c-1.912,0-3.864,0.382-5.805,1.136L8.255,296.251C1.073,299.04,0,303.556,0,306.001c0,2.444,1.072,6.96,8.255,9.752l90.111,34.996
+			C100.308,351.503,102.261,351.886,104.173,351.886z" />
+              </g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+          </svg>
+        </li>
+        <li>
+          <svg class="configuration" version="1.1" id="Icons" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
+            <path d="M29,17.6c-1.2-0.4-2-1-2-1.6s0.8-1.3,2-1.6c0.5-0.2,0.8-0.7,0.7-1.2c-0.4-1.8-1-3.4-2.1-4.9c-0.3-0.4-0.8-0.6-1.3-0.3
+          c-1.1,0.6-2.2,0.7-2.6,0.3c-0.4-0.4-0.3-1.5,0.3-2.6c0.2-0.5,0.1-1-0.3-1.3c-1.5-1-3.2-1.7-4.9-2.1c-0.5-0.1-1,0.2-1.2,0.7
+          c-0.4,1.2-1,2-1.6,2s-1.3-0.8-1.6-2c-0.2-0.5-0.7-0.8-1.2-0.7c-1.8,0.4-3.4,1-4.9,2.1C7.8,4.6,7.7,5.2,7.9,5.6
+          c0.6,1.1,0.7,2.2,0.3,2.6C7.8,8.6,6.8,8.5,5.6,7.9c-0.5-0.2-1-0.1-1.3,0.3c-1,1.5-1.7,3.2-2.1,4.9c-0.1,0.5,0.2,1,0.7,1.2
+          c1.2,0.4,2,1,2,1.6s-0.8,1.3-2,1.6c-0.5,0.2-0.8,0.7-0.7,1.2c0.4,1.8,1,3.4,2.1,4.9c0.3,0.4,0.8,0.6,1.3,0.3
+          c1.1-0.6,2.2-0.7,2.6-0.3c0.4,0.4,0.3,1.5-0.3,2.6c-0.2,0.5-0.1,1,0.3,1.3c1.5,1,3.2,1.7,4.9,2.1c0.5,0.1,1-0.2,1.2-0.7
+          c0.4-1.2,1-2,1.6-2s1.3,0.8,1.6,2c0.1,0.4,0.5,0.7,1,0.7c0.1,0,0.1,0,0.2,0c1.8-0.4,3.4-1,4.9-2.1c0.4-0.3,0.6-0.8,0.3-1.3
+          c-0.6-1.1-0.7-2.2-0.3-2.6c0.4-0.4,1.5-0.3,2.6,0.3c0.5,0.2,1,0.1,1.3-0.3c1-1.5,1.7-3.2,2.1-4.9C29.8,18.3,29.5,17.8,29,17.6z
+          M16,23c-3.9,0-7-3.1-7-7s3.1-7,7-7s7,3.1,7,7S19.9,23,16,23z" />
+          </svg>
+        </li>
+      </ul>
+    </header>
+    <section aria-label="sidebar" class="sidebar">
+      <div class="inbox">
+        <nav class="nav">
+          <ul>
+            <li>Inbox</li>
+            <li>Today</li>
+            <li>Upcoming</li>
+          </ul>
+        </nav>
+      </div>
+      <div class="projects">
+        <h2>Projects</h2>
+        <p class="add-project">Add Project</p>
+      </div>
+    </section>
+    <section aria-label="main" class="main">
+      <div class="date-sec">
+        <div class="arrow">
+          <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="558.957px" height="558.957px" viewBox="0 0 558.957 558.957" style="enable-background:new 0 0 558.957 558.957;" xml:space="preserve">
+            <g>
+              <g>
+                <polygon points="462.745,0 96.212,279.479 462.745,558.957 462.745,419.221 278.713,279.479 462.745,139.738 		" />
+              </g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+          </svg>
+        </div>
+        <div class="date">
+          <p>Today</p>
+          <span>monday, july 13th 2022 </span>
+        </div>
+        <div class="arrow">
+          <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="434.002px" height="434.002px" viewBox="0 0 434.002 434.002" style="enable-background:new 0 0 434.002 434.002;" xml:space="preserve">
+            <g>
+              <g>
+                <path d="M95.457,434.002l-33.105-45.076l234.094-171.928L62.352,45.077L95.456,0L360.24,194.459
+             c7.174,5.269,11.41,13.638,11.41,22.539c0,8.9-4.236,17.27-11.41,22.538L95.457,434.002z" />
+              </g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <div class="list-view">
+
+        <div class="task">
+          <div class="task-name">
+            <svg class="priority-icon" viewBox="0 0 72 72" id="emoji" xmlns="http://www.w3.org/2000/svg">
+              <g id="color">
+                <path stroke="none" d="M35.5661,6.4066c-16.0162,0-29,12.9838-29,29c0,16.0164,12.9838,29,29,29s29-12.9836,29-29 C64.5661,19.3903,51.5823,6.4066,35.5661,6.4066z M35.5661,55.4066c-11.0457,0-20-8.9543-20-20s8.9543-20,20-20s20,8.9543,20,20 S46.6118,55.4066,35.5661,55.4066z" />
+              </g>
+              <g id="hair" />
+              <g id="skin" />
+              <g id="skin-shadow" />
+              <g id="line">
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M48.5153,25.5046" />
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M66,37.6554" />
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M48.5153,26.3185" />
+                <circle cx="35.7952" cy="35.9372" r="29" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                <circle cx="35.7952" cy="35.9372" r="20" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+              </g>
+            </svg>
+            <p>Clean the house</p>
+          </div>
+          <span class="project-name">House Organization</span>
+        </div>
+
+        <div class="task">
+          <div class="task-name">
+            <svg class="priority-icon" viewBox="0 0 72 72" id="emoji" xmlns="http://www.w3.org/2000/svg">
+              <g id="color">
+                <path stroke="none" d="M35.5661,6.4066c-16.0162,0-29,12.9838-29,29c0,16.0164,12.9838,29,29,29s29-12.9836,29-29 C64.5661,19.3903,51.5823,6.4066,35.5661,6.4066z M35.5661,55.4066c-11.0457,0-20-8.9543-20-20s8.9543-20,20-20s20,8.9543,20,20 S46.6118,55.4066,35.5661,55.4066z" />
+              </g>
+              <g id="hair" />
+              <g id="skin" />
+              <g id="skin-shadow" />
+              <g id="line">
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M48.5153,25.5046" />
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M66,37.6554" />
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M48.5153,26.3185" />
+                <circle cx="35.7952" cy="35.9372" r="29" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                <circle cx="35.7952" cy="35.9372" r="20" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+              </g>
+            </svg>
+            <p>Clean the house</p>
+          </div>
+          <span class="project-name">House Organization</span>
+        </div>
+
+        <div class="task">
+          <div class="task-name">
+            <svg class="priority-icon" viewBox="0 0 72 72" id="emoji" xmlns="http://www.w3.org/2000/svg">
+              <g id="color">
+                <path stroke="none" d="M35.5661,6.4066c-16.0162,0-29,12.9838-29,29c0,16.0164,12.9838,29,29,29s29-12.9836,29-29 C64.5661,19.3903,51.5823,6.4066,35.5661,6.4066z M35.5661,55.4066c-11.0457,0-20-8.9543-20-20s8.9543-20,20-20s20,8.9543,20,20 S46.6118,55.4066,35.5661,55.4066z" />
+              </g>
+              <g id="hair" />
+              <g id="skin" />
+              <g id="skin-shadow" />
+              <g id="line">
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M48.5153,25.5046" />
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M66,37.6554" />
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M48.5153,26.3185" />
+                <circle cx="35.7952" cy="35.9372" r="29" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                <circle cx="35.7952" cy="35.9372" r="20" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+              </g>
+            </svg>
+            <p>Clean the house</p>
+          </div>
+          <span class="project-name">House Organization</span>
+        </div>
+
+        <div class="task">
+          <div class="task-name">
+            <svg class="priority-icon" viewBox="0 0 72 72" id="emoji" xmlns="http://www.w3.org/2000/svg">
+              <g id="color">
+                <path stroke="none" d="M35.5661,6.4066c-16.0162,0-29,12.9838-29,29c0,16.0164,12.9838,29,29,29s29-12.9836,29-29 C64.5661,19.3903,51.5823,6.4066,35.5661,6.4066z M35.5661,55.4066c-11.0457,0-20-8.9543-20-20s8.9543-20,20-20s20,8.9543,20,20 S46.6118,55.4066,35.5661,55.4066z" />
+              </g>
+              <g id="hair" />
+              <g id="skin" />
+              <g id="skin-shadow" />
+              <g id="line">
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M48.5153,25.5046" />
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M66,37.6554" />
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M48.5153,26.3185" />
+                <circle cx="35.7952" cy="35.9372" r="29" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                <circle cx="35.7952" cy="35.9372" r="20" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+              </g>
+            </svg>
+            <p>Clean the house</p>
+          </div>
+          <span class="project-name">House Organization</span>
+        </div>
+
+        <div class="task">
+          <div class="task-name">
+            <svg class="priority-icon" viewBox="0 0 72 72" id="emoji" xmlns="http://www.w3.org/2000/svg">
+              <g id="color">
+                <path stroke="none" d="M35.5661,6.4066c-16.0162,0-29,12.9838-29,29c0,16.0164,12.9838,29,29,29s29-12.9836,29-29 C64.5661,19.3903,51.5823,6.4066,35.5661,6.4066z M35.5661,55.4066c-11.0457,0-20-8.9543-20-20s8.9543-20,20-20s20,8.9543,20,20 S46.6118,55.4066,35.5661,55.4066z" />
+              </g>
+              <g id="hair" />
+              <g id="skin" />
+              <g id="skin-shadow" />
+              <g id="line">
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M48.5153,25.5046" />
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M66,37.6554" />
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M48.5153,26.3185" />
+                <circle cx="35.7952" cy="35.9372" r="29" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                <circle cx="35.7952" cy="35.9372" r="20" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+              </g>
+            </svg>
+            <p>Clean the house</p>
+          </div>
+          <span class="project-name">House Organization</span>
+        </div>
+
+        <div class="task">
+          <div class="task-name">
+            <svg class="priority-icon" viewBox="0 0 72 72" id="emoji" xmlns="http://www.w3.org/2000/svg">
+              <g id="color">
+                <path stroke="none" d="M35.5661,6.4066c-16.0162,0-29,12.9838-29,29c0,16.0164,12.9838,29,29,29s29-12.9836,29-29 C64.5661,19.3903,51.5823,6.4066,35.5661,6.4066z M35.5661,55.4066c-11.0457,0-20-8.9543-20-20s8.9543-20,20-20s20,8.9543,20,20 S46.6118,55.4066,35.5661,55.4066z" />
+              </g>
+              <g id="hair" />
+              <g id="skin" />
+              <g id="skin-shadow" />
+              <g id="line">
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M48.5153,25.5046" />
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M66,37.6554" />
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M48.5153,26.3185" />
+                <circle cx="35.7952" cy="35.9372" r="29" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                <circle cx="35.7952" cy="35.9372" r="20" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+              </g>
+            </svg>
+            <p>Clean the house</p>
+          </div>
+          <span class="project-name">House Organization</span>
+        </div>
+
+        <div class="task">
+          <div class="task-name">
+            <svg class="priority-icon" viewBox="0 0 72 72" id="emoji" xmlns="http://www.w3.org/2000/svg">
+              <g id="color">
+                <path stroke="none" d="M35.5661,6.4066c-16.0162,0-29,12.9838-29,29c0,16.0164,12.9838,29,29,29s29-12.9836,29-29 C64.5661,19.3903,51.5823,6.4066,35.5661,6.4066z M35.5661,55.4066c-11.0457,0-20-8.9543-20-20s8.9543-20,20-20s20,8.9543,20,20 S46.6118,55.4066,35.5661,55.4066z" />
+              </g>
+              <g id="hair" />
+              <g id="skin" />
+              <g id="skin-shadow" />
+              <g id="line">
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M48.5153,25.5046" />
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M66,37.6554" />
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M48.5153,26.3185" />
+                <circle cx="35.7952" cy="35.9372" r="29" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                <circle cx="35.7952" cy="35.9372" r="20" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+              </g>
+            </svg>
+            <p>Clean the house</p>
+          </div>
+          <span class="project-name">House Organization</span>
+        </div>
+
+        <div class="task">
+          <div class="task-name">
+            <svg class="priority-icon" viewBox="0 0 72 72" id="emoji" xmlns="http://www.w3.org/2000/svg">
+              <g id="color">
+                <path stroke="none" d="M35.5661,6.4066c-16.0162,0-29,12.9838-29,29c0,16.0164,12.9838,29,29,29s29-12.9836,29-29 C64.5661,19.3903,51.5823,6.4066,35.5661,6.4066z M35.5661,55.4066c-11.0457,0-20-8.9543-20-20s8.9543-20,20-20s20,8.9543,20,20 S46.6118,55.4066,35.5661,55.4066z" />
+              </g>
+              <g id="hair" />
+              <g id="skin" />
+              <g id="skin-shadow" />
+              <g id="line">
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M48.5153,25.5046" />
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M66,37.6554" />
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M48.5153,26.3185" />
+                <circle cx="35.7952" cy="35.9372" r="29" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                <circle cx="35.7952" cy="35.9372" r="20" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+              </g>
+            </svg>
+            <p>Clean the house</p>
+          </div>
+          <span class="project-name">House Organization</span>
+        </div>
+
+        <div class="task">
+          <div class="task-name">
+            <svg class="priority-icon" viewBox="0 0 72 72" id="emoji" xmlns="http://www.w3.org/2000/svg">
+              <g id="color">
+                <path stroke="none" d="M35.5661,6.4066c-16.0162,0-29,12.9838-29,29c0,16.0164,12.9838,29,29,29s29-12.9836,29-29 C64.5661,19.3903,51.5823,6.4066,35.5661,6.4066z M35.5661,55.4066c-11.0457,0-20-8.9543-20-20s8.9543-20,20-20s20,8.9543,20,20 S46.6118,55.4066,35.5661,55.4066z" />
+              </g>
+              <g id="hair" />
+              <g id="skin" />
+              <g id="skin-shadow" />
+              <g id="line">
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M48.5153,25.5046" />
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M66,37.6554" />
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M48.5153,26.3185" />
+                <circle cx="35.7952" cy="35.9372" r="29" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                <circle cx="35.7952" cy="35.9372" r="20" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+              </g>
+            </svg>
+            <p>Clean the house</p>
+          </div>
+          <span class="project-name">House Organization</span>
+        </div>
+
+        <div class="task">
+          <div class="task-name">
+            <svg class="priority-icon" viewBox="0 0 72 72" id="emoji" xmlns="http://www.w3.org/2000/svg">
+              <g id="color">
+                <path stroke="none" d="M35.5661,6.4066c-16.0162,0-29,12.9838-29,29c0,16.0164,12.9838,29,29,29s29-12.9836,29-29 C64.5661,19.3903,51.5823,6.4066,35.5661,6.4066z M35.5661,55.4066c-11.0457,0-20-8.9543-20-20s8.9543-20,20-20s20,8.9543,20,20 S46.6118,55.4066,35.5661,55.4066z" />
+              </g>
+              <g id="hair" />
+              <g id="skin" />
+              <g id="skin-shadow" />
+              <g id="line">
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M48.5153,25.5046" />
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M66,37.6554" />
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M48.5153,26.3185" />
+                <circle cx="35.7952" cy="35.9372" r="29" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                <circle cx="35.7952" cy="35.9372" r="20" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+              </g>
+            </svg>
+            <p>Clean the house</p>
+          </div>
+          <span class="project-name">House Organization</span>
+        </div>
+
+        <div class="task">
+          <div class="task-name">
+            <svg class="priority-icon" viewBox="0 0 72 72" id="emoji" xmlns="http://www.w3.org/2000/svg">
+              <g id="color">
+                <path stroke="none" d="M35.5661,6.4066c-16.0162,0-29,12.9838-29,29c0,16.0164,12.9838,29,29,29s29-12.9836,29-29 C64.5661,19.3903,51.5823,6.4066,35.5661,6.4066z M35.5661,55.4066c-11.0457,0-20-8.9543-20-20s8.9543-20,20-20s20,8.9543,20,20 S46.6118,55.4066,35.5661,55.4066z" />
+              </g>
+              <g id="hair" />
+              <g id="skin" />
+              <g id="skin-shadow" />
+              <g id="line">
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M48.5153,25.5046" />
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M66,37.6554" />
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M48.5153,26.3185" />
+                <circle cx="35.7952" cy="35.9372" r="29" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                <circle cx="35.7952" cy="35.9372" r="20" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+              </g>
+            </svg>
+            <p>Clean the house</p>
+          </div>
+          <span class="project-name">House Organization</span>
+        </div>
+
+        <div class="task">
+          <div class="task-name">
+            <svg class="priority-icon" viewBox="0 0 72 72" id="emoji" xmlns="http://www.w3.org/2000/svg">
+              <g id="color">
+                <path stroke="none" d="M35.5661,6.4066c-16.0162,0-29,12.9838-29,29c0,16.0164,12.9838,29,29,29s29-12.9836,29-29 C64.5661,19.3903,51.5823,6.4066,35.5661,6.4066z M35.5661,55.4066c-11.0457,0-20-8.9543-20-20s8.9543-20,20-20s20,8.9543,20,20 S46.6118,55.4066,35.5661,55.4066z" />
+              </g>
+              <g id="hair" />
+              <g id="skin" />
+              <g id="skin-shadow" />
+              <g id="line">
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M48.5153,25.5046" />
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M66,37.6554" />
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M48.5153,26.3185" />
+                <circle cx="35.7952" cy="35.9372" r="29" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                <circle cx="35.7952" cy="35.9372" r="20" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+              </g>
+            </svg>
+            <p>Clean the house</p>
+          </div>
+          <span class="project-name">House Organization</span>
+        </div>
+
+        <div class="task">
+          <div class="task-name">
+            <svg class="priority-icon" viewBox="0 0 72 72" id="emoji" xmlns="http://www.w3.org/2000/svg">
+              <g id="color">
+                <path stroke="none" d="M35.5661,6.4066c-16.0162,0-29,12.9838-29,29c0,16.0164,12.9838,29,29,29s29-12.9836,29-29 C64.5661,19.3903,51.5823,6.4066,35.5661,6.4066z M35.5661,55.4066c-11.0457,0-20-8.9543-20-20s8.9543-20,20-20s20,8.9543,20,20 S46.6118,55.4066,35.5661,55.4066z" />
+              </g>
+              <g id="hair" />
+              <g id="skin" />
+              <g id="skin-shadow" />
+              <g id="line">
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M48.5153,25.5046" />
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M66,37.6554" />
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M48.5153,26.3185" />
+                <circle cx="35.7952" cy="35.9372" r="29" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                <circle cx="35.7952" cy="35.9372" r="20" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+              </g>
+            </svg>
+            <p>Clean the house</p>
+          </div>
+          <span class="project-name">House Organization</span>
+        </div>
+
+        <div class="task">
+          <div class="task-name">
+            <svg class="priority-icon" viewBox="0 0 72 72" id="emoji" xmlns="http://www.w3.org/2000/svg">
+              <g id="color">
+                <path stroke="none" d="M35.5661,6.4066c-16.0162,0-29,12.9838-29,29c0,16.0164,12.9838,29,29,29s29-12.9836,29-29 C64.5661,19.3903,51.5823,6.4066,35.5661,6.4066z M35.5661,55.4066c-11.0457,0-20-8.9543-20-20s8.9543-20,20-20s20,8.9543,20,20 S46.6118,55.4066,35.5661,55.4066z" />
+              </g>
+              <g id="hair" />
+              <g id="skin" />
+              <g id="skin-shadow" />
+              <g id="line">
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M48.5153,25.5046" />
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M66,37.6554" />
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M48.5153,26.3185" />
+                <circle cx="35.7952" cy="35.9372" r="29" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                <circle cx="35.7952" cy="35.9372" r="20" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+              </g>
+            </svg>
+            <p>Clean the house</p>
+          </div>
+          <span class="project-name">House Organization</span>
+        </div>
+
+        <div class="task">
+          <div class="task-name">
+            <svg class="priority-icon" viewBox="0 0 72 72" id="emoji" xmlns="http://www.w3.org/2000/svg">
+              <g id="color">
+                <path stroke="none" d="M35.5661,6.4066c-16.0162,0-29,12.9838-29,29c0,16.0164,12.9838,29,29,29s29-12.9836,29-29 C64.5661,19.3903,51.5823,6.4066,35.5661,6.4066z M35.5661,55.4066c-11.0457,0-20-8.9543-20-20s8.9543-20,20-20s20,8.9543,20,20 S46.6118,55.4066,35.5661,55.4066z" />
+              </g>
+              <g id="hair" />
+              <g id="skin" />
+              <g id="skin-shadow" />
+              <g id="line">
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M48.5153,25.5046" />
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M66,37.6554" />
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M48.5153,26.3185" />
+                <circle cx="35.7952" cy="35.9372" r="29" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                <circle cx="35.7952" cy="35.9372" r="20" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+              </g>
+            </svg>
+            <p>Clean the house</p>
+          </div>
+          <span class="project-name">House Organization</span>
+        </div>
+
+        <div class="task">
+          <div class="task-name">
+            <svg class="priority-icon" viewBox="0 0 72 72" id="emoji" xmlns="http://www.w3.org/2000/svg">
+              <g id="color">
+                <path stroke="none" d="M35.5661,6.4066c-16.0162,0-29,12.9838-29,29c0,16.0164,12.9838,29,29,29s29-12.9836,29-29 C64.5661,19.3903,51.5823,6.4066,35.5661,6.4066z M35.5661,55.4066c-11.0457,0-20-8.9543-20-20s8.9543-20,20-20s20,8.9543,20,20 S46.6118,55.4066,35.5661,55.4066z" />
+              </g>
+              <g id="hair" />
+              <g id="skin" />
+              <g id="skin-shadow" />
+              <g id="line">
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M48.5153,25.5046" />
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M66,37.6554" />
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M48.5153,26.3185" />
+                <circle cx="35.7952" cy="35.9372" r="29" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                <circle cx="35.7952" cy="35.9372" r="20" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+              </g>
+            </svg>
+            <p>Clean the house</p>
+          </div>
+          <span class="project-name">House Organization</span>
+        </div>
+
+        <div class="task">
+          <div class="task-name">
+            <svg class="priority-icon" viewBox="0 0 72 72" id="emoji" xmlns="http://www.w3.org/2000/svg">
+              <g id="color">
+                <path stroke="none" d="M35.5661,6.4066c-16.0162,0-29,12.9838-29,29c0,16.0164,12.9838,29,29,29s29-12.9836,29-29 C64.5661,19.3903,51.5823,6.4066,35.5661,6.4066z M35.5661,55.4066c-11.0457,0-20-8.9543-20-20s8.9543-20,20-20s20,8.9543,20,20 S46.6118,55.4066,35.5661,55.4066z" />
+              </g>
+              <g id="hair" />
+              <g id="skin" />
+              <g id="skin-shadow" />
+              <g id="line">
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M48.5153,25.5046" />
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M66,37.6554" />
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M48.5153,26.3185" />
+                <circle cx="35.7952" cy="35.9372" r="29" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                <circle cx="35.7952" cy="35.9372" r="20" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+              </g>
+            </svg>
+            <p>Clean the house</p>
+          </div>
+          <span class="project-name">House Organization</span>
+        </div>
+
+        <div class="task">
+          <div class="task-name">
+            <svg class="priority-icon" viewBox="0 0 72 72" id="emoji" xmlns="http://www.w3.org/2000/svg">
+              <g id="color">
+                <path stroke="none" d="M35.5661,6.4066c-16.0162,0-29,12.9838-29,29c0,16.0164,12.9838,29,29,29s29-12.9836,29-29 C64.5661,19.3903,51.5823,6.4066,35.5661,6.4066z M35.5661,55.4066c-11.0457,0-20-8.9543-20-20s8.9543-20,20-20s20,8.9543,20,20 S46.6118,55.4066,35.5661,55.4066z" />
+              </g>
+              <g id="hair" />
+              <g id="skin" />
+              <g id="skin-shadow" />
+              <g id="line">
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M48.5153,25.5046" />
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M66,37.6554" />
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M48.5153,26.3185" />
+                <circle cx="35.7952" cy="35.9372" r="29" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                <circle cx="35.7952" cy="35.9372" r="20" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+              </g>
+            </svg>
+            <p>Clean the house</p>
+          </div>
+          <span class="project-name">House Organization</span>
+        </div>
+
+
+
+      </div>
+
+    </section>
+  </div>
+</body>
+
+</html>
