@@ -1,47 +1,85 @@
-import controlProjects from './project.js';
+import handleProjects from './project.js';
 import dom from './dom.js';
+import events from './pubSub.js';
+import creator from './creator.js';
 
-const controlTasks = (function() {
+const handleTasks = (function() {
+  function Task() {
+    const title = null;
+    const description = null;
+    const dueDate = null;
+    const time = null;
+    const priority = null;
+    const notes = null;
+    const project = null;
+    const checklist = [];
+    const isComplete = false;
+
+    return {title, description, dueDate, time, priority, notes, project, checklist, isComplete}
+  }
+
   const tasks = [];
+  let newTask = Task();
 
-  class Task {
-    constructor(title, description, dueDate, priority, notes, project, ...checklist) {
-      this.title = title;
-      this.description = description;
-      this.dueDate = dueDate;
-      this.priority = priority;
-      this.notes = notes;
-      this.project = project;
-      this.checklist = checklist;
-      this.isComplete = false;
-    }
+  function setTitle() {
+    newTask.title = creator.creator.input.value;
   }
 
-  function createTask(title, description, dueDate, priority, notes, project, ...checklist) {
-    const newTask = new Task(title, description, dueDate, priority, notes, project, ...checklist);
-    tasks.push(newTask)
-    dom.appendTask();
+  function setDescription() {
+    newTask.description = creator.desc.textArea.value;
+  }
+
+  function setDate() {
+    newTask.dueDate = creator.dueDate.date.value;
+  }
+
+  function setTime() {
+    newTask.time = creator.time.time.value;
+  }
+
+  function setNotes() {
+    newTask.notes = creator.notes.textArea.value;
+  }
+
+  function setPriority() {
+    newTask.priority = creator.priority.select.value;
+  }
+  
+  function addTask() {
+    dom.appendTask(newTask.title, newTask.priority, newTask.project);
+    tasks.push(newTask);
     console.log(tasks)
-
-    // insert the task to the right project
-    for(let i = 0; i < controlProjects.projects.length; i++) {
-      if(newTask.project === controlProjects.projects[i].title) {
-        controlProjects.projects[i].tasks.push(newTask)
-      }
-    }
+    newTask = Task();
+    creator.resetCreator();
+    removeEvents();
   }
 
-  function cancelAdd() {
-    dom.taskDiv.addTaskBg.remove();
+  function activateEvents() {
+    creator.appendCreator();
+    creator.creator.input.addEventListener('change', setTitle);
+    creator.desc.textArea.addEventListener('change', setDescription);
+    creator.dueDate.date.addEventListener('change', setDate);
+    creator.time.time.addEventListener('change', setTime)
+    creator.priority.select.addEventListener('change', setPriority);
+    creator.notes.textArea.addEventListener('change', setNotes);
+    creator.creator.cancelBtn.addEventListener('click', creator.cancelAdd);
+    creator.creator.addBtn.addEventListener('click', addTask);
   }
 
-  dom.taskDiv.cancelBtn.addEventListener('click', cancelAdd);
-  dom.taskDiv.addBtn.addEventListener('click', () => {
-    createTask(dom.taskDiv.inputTask.value)
-  });
+  function removeEvents() {
+    creator.creator.input.removeEventListener('change', setTitle);
+    creator.desc.textArea.removeEventListener('change', setDescription);
+    creator.dueDate.date.removeEventListener('change', setDate);
+    creator.time.time.removeEventListener('change', setTime)
+    creator.priority.select.removeEventListener('change', setPriority);
+    creator.notes.textArea.removeEventListener('change',  setNotes);
+    creator.creator.cancelBtn.removeEventListener('click', creator.cancelAdd);
+    creator.creator.addBtn.removeEventListener('click', addTask);
+  }
 
+  dom.select.addTaskBtn.addEventListener('click', activateEvents);
 
-  return {createTask}
+  return{tasks, removeEvents}
 })()
 
-export default controlTasks;
+export default handleTasks;
