@@ -6,8 +6,8 @@ import flagIcon from './img/flag-svgrepo-com.svg';
 import clockIcon from './img/clock-svgrepo-com.svg';
 import checklistIcon from './img/checklist-svgrepo-com.svg';
 import dom from './dom.js';
-import project from './project.js';
-import task from './task.js';
+import events from'./pubSub.js';
+
 
 const creator = (function() {
 
@@ -40,7 +40,8 @@ function appendCreator () {
   creator.creatorProp.classList.add('creator-properties');
 
   creator.creatorPropInput.classList.add('creator-prop-input');
-  creator.creatorPropInput.textContent = 'Schedule';
+  creator.creatorPropInput.style.background = '#1A1A1A'
+  creator.creatorPropInput.textContent = '';
 
   creator.cancelBtn.setAttribute('type', 'button');
   creator.cancelBtn.textContent = 'Cancel';
@@ -98,7 +99,6 @@ function appendPriority() {
   priority.select.classList.add('priority-select');
   priority.opt0.setAttribute('value', 'priority');
   priority.opt0.setAttribute('selected', 'selected');
-  priority.opt0.setAttribute('disabled', 'disabled');
   priority.opt0.textContent = 'Priority';
   priority.opt1.setAttribute('value', 'low');
   priority.opt1.textContent = 'Low';
@@ -107,10 +107,34 @@ function appendPriority() {
   priority.opt3.setAttribute('value', 'high');
   priority.opt3.textContent = 'High';
 
-  priority.select.append(priority.opt0, priority.opt1, priority.opt2, priority.opt3);
+  priority.select.append(priority.opt1, priority.opt2, priority.opt3, priority.opt0);
   creator.creatorPropInput.textContent = '';
   creator.creatorPropInput.append(priority.select)
 }
+
+const projects = {
+  select: document.createElement('select'),
+  opt0: document.createElement('option'),
+}
+
+function appendProjects() {
+  projects.select.classList.add('projects-select');
+  projects.opt0.setAttribute('value', 'inbox');
+  projects.opt0.setAttribute('selected', 'selected');
+  projects.opt0.textContent = 'Inbox';
+
+  projects.select.append(projects.opt0);
+  creator.creatorPropInput.textContent = '';
+  creator.creatorPropInput.append(projects.select)
+}
+
+events.subscribe('projects', events.events, (project) => {
+  const opt = document.createElement('option');
+        opt.setAttribute('value', project.title);
+        opt.textContent = project.title;
+  projects.select.appendChild(opt);
+})
+
 
 const notes = {
   textArea: document.createElement('textarea')
@@ -166,8 +190,9 @@ function resetCreator() {
   desc.textArea.value = '';
   notes.textArea.value = '';
   dueDate.date.value = '';
-  priority.select.textContent = priority.opt0.value;
   time.time.value = '';
+  priority.select.selectedIndex = null;
+  projects.select.selectedIndex = null;
 }
 
 creator.priority.addEventListener('click', appendPriority);
@@ -175,13 +200,7 @@ creator.notes.addEventListener('click', appendNotes);
 creator.desc.addEventListener('click', appendDesc);
 creator.calendar.addEventListener('click', appendDueDate);
 creator.clock.addEventListener('click', appendTime);
-
-function cancelAdd() {
-  creator.creatorBg.remove();
-  resetCreator();
-  project.removeEvents();
-  task.removeEvents();
-}
+creator.project.addEventListener('click', appendProjects);
 
 return {
   creator,
@@ -192,7 +211,7 @@ return {
   time,
   resetCreator,
   appendCreator, 
-  cancelAdd
+  projects
 }
 })()
 

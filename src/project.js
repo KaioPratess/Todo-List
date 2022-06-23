@@ -3,21 +3,21 @@ import creator from './creator.js';
 import events from './pubSub.js';
 
 const handleProjects = (function () {
-  function Project() {
-    const title = null;
-    const description = null;
-    const dueDate = null;
-    const time = null;
-    const priority = null;
-    const notes = null;
-    const tasks = [];
-    const isComplete = false;
-
-    return {title, description, dueDate, time, priority, notes, tasks, isComplete}
+  class Project {
+    constructor(title, description, dueDate, time, priority, notes, ...tasks) {
+      this.title = title;
+      this.description =  description;
+      this.dueDate =  dueDate;
+      this.time =  time;
+      this.priority =  priority;
+      this.notes =  notes;
+      this.tasks =  tasks;
+      this.isComplete =  false;
+    }
   }
 
   const projects = [];
-  let newProject = Project();
+  let newProject = new Project;
 
   function setTitle() {
     newProject.title = creator.creator.input.value;
@@ -44,23 +44,37 @@ const handleProjects = (function () {
   }
 
   function addProject() {
-    dom.appendProject(newProject.title, newProject.dueDate);
-    projects.push(newProject);
-    console.log(projects);
-    newProject = Project();
+    if(newProject.title !== undefined) {
+      dom.appendProject(newProject.title, newProject.dueDate);
+      projects.push(newProject);
+      events.publish('projects', newProject);
+      newProject = new Project;
+      creator.resetCreator();
+      removeEvents();
+    } else {
+      alert('Fill in the fields')
+    }
+  }
+
+  function cancelAdd() {
+    creator.creator.creatorBg.remove();
+    creator.creator.cancelBtn.classList.remove('proj')
     creator.resetCreator();
     removeEvents();
+    newProject = new Project;
   }
 
   function activateEvents() {
     creator.appendCreator();
+    creator.creator.project.remove();
+    creator.creator.cancelBtn.classList.add('proj')
     creator.creator.input.addEventListener('change', setTitle);
     creator.desc.textArea.addEventListener('change', setDescription);
     creator.dueDate.date.addEventListener('change', setDate);
     creator.time.time.addEventListener('change', setTime)
     creator.priority.select.addEventListener('change', setPriority);
     creator.notes.textArea.addEventListener('change', setNotes);
-    creator.creator.cancelBtn.addEventListener('click', creator.cancelAdd);
+    creator.creator.cancelBtn.addEventListener('click', cancelAdd);
     creator.creator.addBtn.addEventListener('click', addProject);
   }
 
@@ -71,13 +85,13 @@ const handleProjects = (function () {
     creator.time.time.removeEventListener('change', setTime)
     creator.priority.select.removeEventListener('change', setPriority);
     creator.notes.textArea.removeEventListener('change',  setNotes);
-    creator.creator.cancelBtn.removeEventListener('click', creator.cancelAdd);
+    creator.creator.cancelBtn.removeEventListener('click', cancelAdd);
     creator.creator.addBtn.removeEventListener('click', addProject);
   }
 
   dom.select.addProjectBtn.addEventListener('click', activateEvents);
 
-  return {projects, removeEvents}
+  return {projects, removeEvents, Project, addProject}
 })()
 
 export default handleProjects;

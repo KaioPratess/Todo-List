@@ -1,4 +1,7 @@
 import creator from './creator.js';
+import events from './pubSub.js';
+import arrowBackward from './img/left-arrow-svgrepo-com.svg';
+import arrowForward from './img/right-arrow-svgrepo-com.svg';
 
 const dom = (function () {
   const select = {
@@ -12,12 +15,15 @@ const dom = (function () {
     upcomingBtn: document.querySelector('.upcoming-btn'),
     projectsSec: document.querySelector('.projects'),
     addProjectBtn: document.querySelector('.add-project'),
+    tasksContainer: document.querySelector('.tasks-container'),
+    headSec: document.querySelector('.head-sec'),
+    dateWrapper: document.querySelector('.date-wrapper'),
     arrowBackward: document.querySelector('.arrow-backward'),
     arrowForward: document.querySelector('.arrow-forward'),
-    tasksContainer: document.querySelector('.tasks-container'),  
+    date: document.querySelector('.date')
   }
 
-  function appendTask(title, priority, project) {
+  function appendTasks(title, priority, project) {
     const wrapper = document.createElement('div');
     const taskTitle = document.createElement('div');
     const para = document.createElement('p');
@@ -61,12 +67,32 @@ const dom = (function () {
     select.projectsSec.insertBefore(wrapper, select.addProjectBtn);
     
     creator.creator.creatorBg.remove();
+
+    events.publish('getWrapper', wrapper);
   }
-  
+
+  function openProject(title) {
+    select.headSec.textContent = '';
+    const projectTitle = document.createElement('h1');
+          projectTitle.classList.add('project-h1');
+          projectTitle.textContent = title;
+    select.headSec.append(projectTitle)
+  }
+
+  function appendInbox() {
+    select.headSec.textContent = '';
+    const inboxTitle = document.createElement('h1');
+          inboxTitle.classList.add('inbox-title');
+          inboxTitle.textContent = 'Inbox';
+    select.headSec.append(inboxTitle)
+  }
+
   return {
     select,
-    appendTask,
-    appendProject
+    appendTasks,
+    appendProject,
+    openProject,
+    appendInbox,
   }
 })();
 

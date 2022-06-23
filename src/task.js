@@ -1,25 +1,25 @@
-import handleProjects from './project.js';
+import project from './project.js';
 import dom from './dom.js';
 import events from './pubSub.js';
 import creator from './creator.js';
 
 const handleTasks = (function() {
-  function Task() {
-    const title = null;
-    const description = null;
-    const dueDate = null;
-    const time = null;
-    const priority = null;
-    const notes = null;
-    const project = null;
-    const checklist = [];
-    const isComplete = false;
-
-    return {title, description, dueDate, time, priority, notes, project, checklist, isComplete}
+  class Task {
+    constructor(title, description, dueDate, time, priority = 'Low', notes, project = 'Inbox', ...checkList) {
+      this.title = title;
+      this.description =  description;
+      this.dueDate =  dueDate;
+      this.time =  time;
+      this.priority =  priority;
+      this.notes =  notes;
+      this.project = project;
+      this.checkList = checkList;
+      this.isComplete =  false;
+    }
   }
 
   const tasks = [];
-  let newTask = Task();
+  let newTask = new Task;
 
   function setTitle() {
     newTask.title = creator.creator.input.value;
@@ -44,16 +44,36 @@ const handleTasks = (function() {
   function setPriority() {
     newTask.priority = creator.priority.select.value;
   }
+
+  function setProject() {
+    newTask.project = creator.projects.select.value;
+  }
   
   function addTask() {
-    dom.appendTask(newTask.title, newTask.priority, newTask.project);
-    tasks.push(newTask);
-    console.log(tasks)
-    newTask = Task();
-    creator.resetCreator();
-    removeEvents();
+    if(newTask.title !== undefined) {
+      tasks.push(newTask);
+      events.publish('tasks', tasks);
+      project.projects.forEach((project) => {
+        if(project.title == newTask.project) {
+          project.tasks.push(newTask)
+        }
+      })
+      newTask = new Task;
+      creator.resetCreator();
+      creator.creator.creatorBg.remove();
+      removeEvents();
+    } else {
+      alert('Fill in the fields')
+    }
   }
 
+  function cancelAdd() {
+    creator.creator.creatorBg.remove();
+    creator.resetCreator();
+    removeEvents();
+    newTask = new Task;
+  }
+  
   function activateEvents() {
     creator.appendCreator();
     creator.creator.input.addEventListener('change', setTitle);
@@ -61,8 +81,9 @@ const handleTasks = (function() {
     creator.dueDate.date.addEventListener('change', setDate);
     creator.time.time.addEventListener('change', setTime)
     creator.priority.select.addEventListener('change', setPriority);
+    creator.projects.select.addEventListener('change', setProject);
     creator.notes.textArea.addEventListener('change', setNotes);
-    creator.creator.cancelBtn.addEventListener('click', creator.cancelAdd);
+    creator.creator.cancelBtn.addEventListener('click', cancelAdd);
     creator.creator.addBtn.addEventListener('click', addTask);
   }
 
@@ -73,13 +94,13 @@ const handleTasks = (function() {
     creator.time.time.removeEventListener('change', setTime)
     creator.priority.select.removeEventListener('change', setPriority);
     creator.notes.textArea.removeEventListener('change',  setNotes);
-    creator.creator.cancelBtn.removeEventListener('click', creator.cancelAdd);
+    creator.creator.cancelBtn.removeEventListener('click', cancelAdd);
     creator.creator.addBtn.removeEventListener('click', addTask);
   }
 
   dom.select.addTaskBtn.addEventListener('click', activateEvents);
 
-  return{tasks, removeEvents}
+  return{tasks, removeEvents, Task, addTask}
 })()
 
 export default handleTasks;
