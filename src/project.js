@@ -91,7 +91,78 @@ const handleProjects = (function () {
 
   dom.select.addProjectBtn.addEventListener('click', activateEvents);
 
-  return {projects, removeEvents, Project, addProject}
+  // filter tasks of a specific project
+  const projectWrappers = [];
+
+  events.subscribe('getWrapper', events.events, (wrapper) => {
+    projectWrappers.push(wrapper);
+
+    projectWrappers.forEach((wrapper) => {
+      wrapper.addEventListener('click', (event) => {
+        projects.forEach((project) => {
+          if(event.target.outerText == project.title) {
+            dom.openProjectTask(project.title, project.description, project.dueDate, project.priority, project.notes, project.isComplete);
+            events.publish('openProject', '');
+            project.tasks.forEach((task) => {
+              dom.appendTasks(task.title, task.priority, task.project);
+            })
+          }
+        })
+      })
+    })
+  });
+
+  function editDescription() {
+    projects.forEach((project) => {
+      if(project.title === dom.select.title.textContent) {
+        project.description = dom.select.descriptionInput.value;
+        console.log(projects)
+      }
+    })
+  }
+
+
+  function editDeadline() {
+    projects.forEach((project) => {
+      if(project.title === dom.select.title.textContent) {
+        project.dueDate = dom.select.deadlineInput.value;
+        console.log(projects)
+      }
+    })
+  }
+
+  function editPriority() {
+    projects.forEach((project) => {
+      if(project.title === dom.select.title.textContent) {
+        project.priority = dom.select.priorityInput.value;
+        console.log(projects)
+      }
+    })
+  }
+
+  function editNotes() {
+    projects.forEach((project) => {
+      if(project.title === dom.select.title.textContent) {
+        project.notes = dom.select.notesInput.value;
+        console.log(projects)
+      }
+    })
+  }
+
+  function checkFinish(event) {
+    projects.forEach((project) => {
+      if(project.title === dom.select.title.textContent) {
+        if(event.target.checked === true) {
+          project.isComplete = true;
+        } else {
+            project.isComplete = false;
+        }
+        console.log(projects)
+      }
+    })
+  }
+
+  return {projects, removeEvents, Project, addProject, editDescription, editDeadline, editPriority, editNotes, checkFinish}
 })()
 
 export default handleProjects;

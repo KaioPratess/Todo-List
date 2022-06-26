@@ -624,7 +624,6 @@ svg:not(.logo) {
 }
 
 .page-structure.dark * {
-  color: white;
   fill: white;
 }
 

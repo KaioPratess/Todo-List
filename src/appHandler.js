@@ -48,27 +48,6 @@ const appHandler = (function() {
   }
 
   dom.select.inboxBtn.addEventListener('click', filterInbox)
-
-  // filter tasks of a specific project
-  const projectWrappers = [];
-
-  events.subscribe('getWrapper', events.events, (wrapper) => {
-    projectWrappers.push(wrapper);
-
-    projectWrappers.forEach((wrapper) => {
-      wrapper.addEventListener('click', (event) => {
-        project.projects.forEach((project) => {
-          if(event.target.outerText == project.title) {
-            dom.select.tasksContainer.textContent = '';
-            dom.openProjectTask(project.title, project.description, project.dueDate, project.priority, project.notes);
-            project.tasks.forEach((task) => {
-              dom.appendTasks(task.title, task.priority, task.project);
-            })
-          }
-        })
-      })
-    })
-  });
 })()
 
 export default appHandler;

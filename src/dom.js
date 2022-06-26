@@ -1,5 +1,7 @@
 import creator from './creator.js';
 import events from './pubSub.js';
+import project from './project.js';
+import task from './task.js';
 
 const dom = (function () {
   const select = {
@@ -79,14 +81,17 @@ const dom = (function () {
     events.publish('getWrapper', wrapper);
   }
 
-  function openProjectTask(title, description, deadline, priority, notes) {
+  function openProjectTask(title, description, deadline, priority, notes, isComplete) {
     select.headSec.textContent = '';
     select.details.style.display = 'block';
+
+    select.tasksContainer.textContent = '';
 
     select.descriptionInput.value = description;
     select.deadlineInput.value = deadline;
     select.priorityInput.value = priority;
-    select.notesInput.textContent = notes;
+    select.notesInput.value = notes;
+    select.isFinishedInput.checked = isComplete;
 
     select.title.textContent = title;
     select.headSec.append(select.details);
@@ -97,7 +102,7 @@ const dom = (function () {
     const inboxTitle = document.createElement('h1');
           inboxTitle.classList.add('inbox-title');
           inboxTitle.textContent = 'Inbox';
-    select.headSec.append(inboxTitle)
+    select.headSec.append(inboxTitle);
   }
 
   select.themeChangeBtn.addEventListener('click', () => {
@@ -106,7 +111,24 @@ const dom = (function () {
 
     select.sun.classList.toggle('active');
     select.moon.classList.toggle('active');
+  });
+
+  events.subscribe('openTask', events.events, () => {
+    dom.select.descriptionInput.addEventListener('change', task.editDescription);
+    dom.select.deadlineInput.addEventListener('change', task.editDeadline);
+    dom.select.priorityInput.addEventListener('change', task.editPriority);
+    dom.select.notesInput.addEventListener('change', task.editNotes);
+    dom.select.isFinishedInput.addEventListener('change', task.checkFinish);
   })
+
+  events.subscribe('openProject', events.events, () => {
+    dom.select.descriptionInput.addEventListener('change', project.editDescription);
+    dom.select.deadlineInput.addEventListener('change', project.editDeadline);
+    dom.select.priorityInput.addEventListener('change', project.editPriority);
+    dom.select.notesInput.addEventListener('change', project.editNotes);
+    dom.select.isFinishedInput.addEventListener('change', project.checkFinish);
+  })
+  
 
   return {
     select,

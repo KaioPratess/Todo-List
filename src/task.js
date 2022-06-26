@@ -105,18 +105,69 @@ const handleTasks = (function() {
     wrappers.forEach((wrapper) => {
       wrapper.addEventListener('click', (event) => {
         tasks.forEach((task) => {
-          dom.select.tasksContainer.textContent = '';
           if(event.target.outerText === task.title) {
+            dom.select.tasksContainer.textContent = '';
             dom.openProjectTask(task.title, task.description, task.dueDate, task.priority, task.notes);
+            events.publish('openTask', '');
           }
         })
       })
     })
-  })
+  });
+
+  function editDescription() {
+    tasks.forEach((task) => {
+      if(task.title === dom.select.title.textContent) {
+        task.description = dom.select.descriptionInput.value;
+        console.log(tasks)
+      }
+    })
+  }
+
+
+  function editDeadline() {
+    tasks.forEach((task) => {
+      if(task.title === dom.select.title.textContent) {
+        task.dueDate = dom.select.deadlineInput.value;
+        console.log(tasks)
+      }
+    })
+  }
+
+  function editPriority() {
+    tasks.forEach((task) => {
+      if(task.title === dom.select.title.textContent) {
+        task.priority = dom.select.priorityInput.value;
+        console.log(tasks)
+      }
+    })
+  }
+
+  function editNotes() {
+    tasks.forEach((task) => {
+      if(task.title === dom.select.title.textContent) {
+        task.notes = dom.select.notesInput.value;
+        console.log(tasks)
+      }
+    })
+  }
+
+  function checkFinish(event) {
+    tasks.forEach((task) => {
+      if(task.title === dom.select.title.textContent) {
+        if(event.target.checked === true) {
+          task.isComplete = true;
+        } else {
+            task.isComplete = false;
+        }
+        console.log(tasks)
+      }
+    })
+  }
 
   dom.select.addTaskBtn.addEventListener('click', activateEvents);
 
-  return{tasks, removeEvents, Task, addTask}
+  return{tasks, removeEvents, Task, addTask,  editDescription, editDeadline, editPriority, editNotes, checkFinish}
 })()
 
 export default handleTasks;
