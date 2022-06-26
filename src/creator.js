@@ -1,13 +1,17 @@
-import notesIcon from './img/notes-svgrepo-com.svg';
-import descIcon from './img/text-description-svgrepo-com.svg';
-import projectIcon from './img/project-svgrepo-com.svg';
-import calendarIcon from './img/next-calendar-page-svgrepo-com.svg';
-import flagIcon from './img/flag-svgrepo-com.svg';
-import clockIcon from './img/clock-svgrepo-com.svg';
-import checklistIcon from './img/checklist-svgrepo-com.svg';
+import notesWhite from './img/notes-white.svg';
+import descWhite from './img/description-white.svg';
+import projectWhite from './img/project-white.svg';
+import calendarWhite from './img/calendar-white.svg';
+import flagWhite from './img/flag-white.svg';
+import checklistWhite from './img/checklist-white.svg';
+import notesBlack from './img/notes-black.svg';
+import descBlack from './img/description-black.svg';
+import projectBlack from './img/project-black.svg';
+import calendarBlack from './img/calendar2-black.svg';
+import flagBlack from './img/flag-black.svg';
+import checklistBlack from './img/checklist-black.svg';
 import dom from './dom.js';
 import events from'./pubSub.js';
-
 
 const creator = (function() {
 
@@ -24,7 +28,6 @@ const creator = {
   project: new Image(),
   calendar: new Image(),
   priority: new Image(),
-  clock: new Image(),
   checklist: new Image(),
 }
 
@@ -40,8 +43,23 @@ function appendCreator () {
   creator.creatorProp.classList.add('creator-properties');
 
   creator.creatorPropInput.classList.add('creator-prop-input');
-  creator.creatorPropInput.style.background = '#1A1A1A'
   creator.creatorPropInput.textContent = '';
+
+  if(dom.select.pageStructure.classList.contains('light')) {
+    creator.notes.src = notesBlack;
+    creator.desc.src = descBlack;
+    creator.project.src = projectBlack;
+    creator.calendar.src = calendarBlack;
+    creator.priority.src = flagBlack;
+    creator.checklist.src = checklistBlack;
+  } else {
+      creator.notes.src = notesWhite;
+      creator.desc.src = descWhite;
+      creator.project.src = projectWhite;
+      creator.calendar.src = calendarWhite;
+      creator.priority.src = flagWhite;
+      creator.checklist.src = checklistWhite;
+  }
 
   creator.cancelBtn.setAttribute('type', 'button');
   creator.cancelBtn.textContent = 'Cancel';
@@ -53,35 +71,25 @@ function appendCreator () {
   creator.addBtn.classList.add('btn');
   creator.addBtn.classList.add('add');
   
-  creator.notes.src = notesIcon;
   creator.notes.classList.add('icon');
   creator.notes.setAttribute('alt', 'notes');
 
-  creator.desc.src = descIcon;
   creator.desc.classList.add('icon');
   creator.desc.setAttribute('alt', 'desc');
 
-  creator.project.src = projectIcon;
   creator.project.classList.add('icon');
   creator.project.setAttribute('alt', 'project');
 
-  creator.calendar.src = calendarIcon;
   creator.calendar.classList.add('icon');
   creator.calendar.setAttribute('alt', 'calendar');
 
-  creator.priority.src = flagIcon;
   creator.priority.classList.add('icon');
   creator.priority.setAttribute('alt', 'priority');
 
-  creator.clock.src = clockIcon;
-  creator.clock.classList.add('icon');
-  creator.clock.setAttribute('alt', 'clock');
-
-  creator.checklist.src = checklistIcon;
   creator.checklist.classList.add('icon');
   creator.checklist.setAttribute('alt', 'checklist');
 
-  creator.creatorProp.append(creator.creatorPropInput, creator.desc, creator.calendar,  creator.clock, creator.priority,  creator.notes, creator.project, creator.checklist, creator.cancelBtn, creator.addBtn);
+  creator.creatorProp.append(creator.creatorPropInput, creator.desc, creator.calendar, creator.priority,  creator.notes, creator.project, creator.checklist, creator.cancelBtn, creator.addBtn);
   creator.creatorContainer.append(creator.input, creator.creatorProp);
   creator.creatorBg.append(creator.creatorContainer);
   dom.select.pageStructure.append(creator.creatorBg);
@@ -199,7 +207,6 @@ creator.priority.addEventListener('click', appendPriority);
 creator.notes.addEventListener('click', appendNotes);
 creator.desc.addEventListener('click', appendDesc);
 creator.calendar.addEventListener('click', appendDueDate);
-creator.clock.addEventListener('click', appendTime);
 creator.project.addEventListener('click', appendProjects);
 
 return {

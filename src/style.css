@@ -4,7 +4,6 @@
   margin: 0;
   box-sizing: border-box;
   list-style: none;
-  color: white;
 } 
 
 body {
@@ -32,16 +31,12 @@ svg:not(.logo) {
   cursor: pointer;
 }
 
-svg {
-  fill: white;
-}
 
 /* Header */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #0B0909;
   height: 81px;
   padding: 0 30px;
   grid-area: header;
@@ -60,7 +55,6 @@ svg {
 .sidebar {
   height: calc(100vh - 81px);
   grid-area: sidebar;
-  background-color: #0E0E0E;
 }
 
 /* Inbox */
@@ -74,8 +68,18 @@ svg {
   position: relative;
 }
 
-.inbox-title::before {
-  content: url("./img/inbox-svgrepo-com.svg");
+.page-structure.dark .inbox-title::before {
+  content: url("./img/inbox-white.svg");
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+  position: relative;
+  top: 3px;
+}
+
+.page-structure.light .inbox-title::before {
+  content: url("./img/inbox-black.svg");
   display: inline-block;
   width: 40px;
   height: 40px;
@@ -94,16 +98,28 @@ svg {
   cursor: pointer;
 }
 
-.nav ul li:nth-child(1)::before {
-  content: url("./img/inbox-svgrepo-com.svg");
+.page-structure.light .nav ul li:nth-child(1)::before {
+  content: url("./img/inbox-black.svg");
 }
 
-.nav ul li:nth-child(2)::before {
-  content: url("./img/calendar-svgrepo-com.svg");
+.page-structure.light .nav ul li:nth-child(2)::before {
+  content: url("./img/calendar-black.svg");
 }
 
-.nav ul li:nth-child(3)::before {
-  content: url("./img/calendar-svgrepo-com.svg");
+.page-structure.light .nav ul li:nth-child(3)::before {
+  content: url("./img/calendar-black.svg");
+}
+
+.page-structure.dark .nav ul li:nth-child(1)::before {
+  content: url("./img/inbox-white.svg");
+}
+
+.page-structure.dark .nav ul li:nth-child(2)::before {
+  content: url("./img/calendar-white.svg");
+}
+
+.page-structure.dark .nav ul li:nth-child(3)::before {
+  content: url("./img/calendar-white.svg");
 }
 
 .nav ul li::before {
@@ -131,8 +147,17 @@ svg {
   margin-top: 25px;
 }
 
-.add-project::before {
-  content: url('./img/plus-svgrepo-com.svg');
+.page-structure.dark .add-project::before {
+  content: url('./img/plus-white.svg');
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+.page-structure.light .add-project::before {
+  content: url('./img/plus-black.svg');
   width: 15px;
   height: 15px;
   display: inline-block;
@@ -143,14 +168,12 @@ svg {
 /* Main */
 .main {
   grid-area: main;
-  background-color: #1A1A1A;
 }
 
 .head-sec {
   display: grid;
   align-items: center;
   padding: 20px 70px;
-  background-color: #121212;
 }
 
 .date {
@@ -214,10 +237,6 @@ svg {
   font-size: 0.875rem;
 }
 
-.task:hover {
-  background-color: #121212;
-}
-
 .priority-icon {
   width: 20px;
   height: 20px;
@@ -240,18 +259,6 @@ svg {
   width: 10px;
 }
 
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #888;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
-
 /* Add container */
 .add-creator-bg {
   position: absolute;
@@ -266,7 +273,6 @@ svg {
 .add-creator-container {
   width: 810px;
   height: 126px;
-  background-color: #121212;
   border-radius: 12px;
   box-shadow:1px 1px 1px rgba(0, 0, 0, .4);
 }
@@ -286,7 +292,8 @@ svg {
 .creator-properties {
   display: flex;
   align-items: center;
-  gap: 20px;
+  justify-content: space-evenly;
+  width: 100%;
 }
 
 .creator-prop-input {
@@ -312,14 +319,7 @@ svg {
   white-space: nowrap;
   border-radius: 12px;
   cursor: pointer;
-}
-
-.btn.cancel {
-  margin-left: 30px;
-}
-
-.btn.cancel.proj {
-  margin-left: 75px;
+  border: none;
 }
 
 .priority-select, .notes, .desc, .dateInput, .time, .projects-select {
@@ -369,4 +369,271 @@ svg {
 
 .arrow-backward {
   transform: rotate(180deg);
+}
+
+/* details container */
+.details-project-task {
+  display: none;
+}
+
+.title {
+  font-size: 3rem;
+  margin-bottom: 30px;
+}
+
+.details-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+}
+
+.details-container input,
+.details-container textarea {
+  color: black;
+  outline: none;
+  border: none;
+  padding: 6px 8px;
+  resize: none;
+}
+
+.details-container select {
+  width: 185px;
+  padding: 5px 8px;
+  border: none;
+  outline: none;
+  margin-bottom: 20px;
+  color: black;
+}
+
+.details-container select option {
+  color: black;
+}
+
+.details-container input {
+  margin-bottom: 20px;
+}
+
+.details-container label {
+  margin-right: 8px;
+}
+
+.details-container div:nth-child(1) div:nth-child(2) label {
+  margin-right: 25px;
+}
+
+.description,
+.deadline {
+  grid-column: 1;
+}
+
+.priority-div,
+.is-finished {
+  grid-column: 2;
+}
+
+.notes-div {
+  grid-column: 3;
+  display: flex;
+}
+
+.notes-div textarea {
+  height: 120px;
+}
+
+@media (prefers-color-scheme: light) {
+  * {
+    color: black;
+  }
+
+  svg {
+    fill: black;
+  }
+
+  .add-creator-container {
+    background-color: #FFC05A;
+  }
+
+  .header {
+    background-color: #FFC05A;
+  }
+
+  .sidebar {
+    background-color: #FFCE7E;
+  }
+
+  .head-sec {
+    background-color: #FFDA9E;
+  }
+
+  .main {
+    background-color: #FFFFFF;
+  }
+
+  .task:hover {
+    background-color: #121212;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+  .creator-prop-input { 
+    background-color: #FFCE7E;
+  }
+}
+
+.page-structure.light .header {
+  background-color: #FFC05A;
+}
+
+.page-structure.light .creator-prop-input {
+  background-color: #FFCE7E;
+}
+
+.page-structure.light *:not(.btn) {
+  fill: black;
+  color: black;
+}
+
+.page-structure.light .sidebar {
+  background-color: #FFCE7E;
+}
+
+.page-structure.light .add-creator-container {
+  background-color: #F2BF58;
+}
+
+.page-structure.light .head-sec {
+  background-color: #FFDA9E;
+}
+
+.page-structure.light .main {
+  background-color: #FFFFFF;
+}
+
+.page-structure.light .task:hover {
+  background-color: #FFDA9E;
+}
+
+.page-structure.light::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.page-structure.light::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+.page-structure.light::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+
+@media (prefers-color-scheme: dark) {
+  * {
+    color: white;
+  }
+
+  .add-creator-container {
+    background-color: #121212;
+  }
+
+  svg {
+    fill: white;
+  }
+
+  .header {
+    background-color: #0B0909;
+  }
+
+  .sidebar {
+    background-color: #0E0E0E;
+  }
+
+  .head-sec {
+    background-color: #121212;
+  }
+
+  .main {
+    background-color: #1A1A1A;
+  }
+
+  .task:hover {
+    background-color: #121212;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+}
+
+.page-structure.dark .header {
+  background-color: #0B0909;
+}
+
+.page-structure.dark .creator-prop-input {
+  background-color: #1A1A1A;
+}
+
+.page-structure.dark .sidebar {
+  background-color: #0E0E0E;
+}
+
+.page-structure.dark .add-creator-container {
+  background-color: #121212;
+}
+
+
+.page-structure.dark .head-sec {
+  background-color: #121212;
+}
+
+.page-structure.dark .main {
+  background-color: #1A1A1A;
+}
+
+.page-structure.dark .task:hover {
+  background-color: #121212;
+}
+
+.page-structure.dark::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.page-structure.dark::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+.page-structure.dark::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.page-structure.dark * {
+  color: white;
+  fill: white;
+}
+
+.sun, 
+.moon {
+  display: none;
+}
+
+.sun.active,
+.moon.active {
+  display: block;
 }

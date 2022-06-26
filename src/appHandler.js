@@ -57,10 +57,10 @@ const appHandler = (function() {
 
     projectWrappers.forEach((wrapper) => {
       wrapper.addEventListener('click', (event) => {
-        dom.select.tasksContainer.textContent = '';
         project.projects.forEach((project) => {
           if(event.target.outerText == project.title) {
-            dom.openProject(project.title);
+            dom.select.tasksContainer.textContent = '';
+            dom.openProjectTask(project.title, project.description, project.dueDate, project.priority, project.notes);
             project.tasks.forEach((task) => {
               dom.appendTasks(task.title, task.priority, task.project);
             })
@@ -69,8 +69,6 @@ const appHandler = (function() {
       })
     })
   });
-
-
-})();
+})()
 
 export default appHandler;

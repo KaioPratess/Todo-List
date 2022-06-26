@@ -1,7 +1,5 @@
 import creator from './creator.js';
 import events from './pubSub.js';
-import arrowBackward from './img/left-arrow-svgrepo-com.svg';
-import arrowForward from './img/right-arrow-svgrepo-com.svg';
 
 const dom = (function () {
   const select = {
@@ -20,7 +18,16 @@ const dom = (function () {
     dateWrapper: document.querySelector('.date-wrapper'),
     arrowBackward: document.querySelector('.arrow-backward'),
     arrowForward: document.querySelector('.arrow-forward'),
-    date: document.querySelector('.date')
+    date: document.querySelector('.date'),
+    details: document.querySelector('.details-project-task'),
+    title: document.querySelector('.title'),
+    descriptionInput: document.querySelector('#description'),
+    deadlineInput: document.querySelector('#deadline'),
+    priorityInput: document.querySelector('#priority'),
+    isFinishedInput: document.querySelector('#finished'),
+    notesInput: document.querySelector('#notes'),
+    sun: document.querySelector('.sun'),
+    moon: document.querySelector('.moon')
   }
 
   function appendTasks(title, priority, project) {
@@ -49,6 +56,7 @@ const dom = (function () {
     wrapper.append(taskTitle, projectTitle);
     select.tasksContainer.appendChild(wrapper);
 
+    events.publish('taskWrapper', wrapper);
     creator.creator.creatorBg.remove();
   }
 
@@ -71,12 +79,17 @@ const dom = (function () {
     events.publish('getWrapper', wrapper);
   }
 
-  function openProject(title) {
+  function openProjectTask(title, description, deadline, priority, notes) {
     select.headSec.textContent = '';
-    const projectTitle = document.createElement('h1');
-          projectTitle.classList.add('project-h1');
-          projectTitle.textContent = title;
-    select.headSec.append(projectTitle)
+    select.details.style.display = 'block';
+
+    select.descriptionInput.value = description;
+    select.deadlineInput.value = deadline;
+    select.priorityInput.value = priority;
+    select.notesInput.textContent = notes;
+
+    select.title.textContent = title;
+    select.headSec.append(select.details);
   }
 
   function appendInbox() {
@@ -87,11 +100,19 @@ const dom = (function () {
     select.headSec.append(inboxTitle)
   }
 
+  select.themeChangeBtn.addEventListener('click', () => {
+    select.pageStructure.classList.toggle('dark');
+    select.pageStructure.classList.toggle('light');
+
+    select.sun.classList.toggle('active');
+    select.moon.classList.toggle('active');
+  })
+
   return {
     select,
     appendTasks,
     appendProject,
-    openProject,
+    openProjectTask,
     appendInbox,
   }
 })();

@@ -98,6 +98,22 @@ const handleTasks = (function() {
     creator.creator.addBtn.removeEventListener('click', addTask);
   }
 
+  const wrappers = [];
+
+  events.subscribe('taskWrapper', events.events, (wrapper) => {
+    wrappers.push(wrapper);
+    wrappers.forEach((wrapper) => {
+      wrapper.addEventListener('click', (event) => {
+        tasks.forEach((task) => {
+          dom.select.tasksContainer.textContent = '';
+          if(event.target.outerText === task.title) {
+            dom.openProjectTask(task.title, task.description, task.dueDate, task.priority, task.notes);
+          }
+        })
+      })
+    })
+  })
+
   dom.select.addTaskBtn.addEventListener('click', activateEvents);
 
   return{tasks, removeEvents, Task, addTask}
