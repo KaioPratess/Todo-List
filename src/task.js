@@ -124,7 +124,6 @@ const handleTasks = (function() {
     })
   }
 
-
   function editDeadline() {
     tasks.forEach((task) => {
       if(task.title === dom.select.title.textContent) {
@@ -165,9 +164,19 @@ const handleTasks = (function() {
     })
   }
 
+  function deleteTask() {
+    tasks.forEach((task) => {
+      if(task.title === dom.select.title.textContent) {
+        const index = tasks.indexOf(task);
+        tasks.splice(index, 1);
+        window.location.reload
+      }
+    })
+  }
+
   dom.select.addTaskBtn.addEventListener('click', activateEvents);
 
-  return{tasks, removeEvents, Task, addTask,  editDescription, editDeadline, editPriority, editNotes, checkFinish}
+  return{tasks, removeEvents, Task, addTask,  editDescription, editDeadline, editPriority, editNotes, checkFinish, deleteTask}
 })()
 
 export default handleTasks;

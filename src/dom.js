@@ -14,6 +14,7 @@ const dom = (function () {
     todayBtn: document.querySelector('.today-btn'),
     upcomingBtn: document.querySelector('.upcoming-btn'),
     projectsSec: document.querySelector('.projects'),
+    projectList: document.querySelector('.project-list'),
     addProjectBtn: document.querySelector('.add-project'),
     tasksContainer: document.querySelector('.tasks-container'),
     headSec: document.querySelector('.head-sec'),
@@ -29,7 +30,8 @@ const dom = (function () {
     isFinishedInput: document.querySelector('#finished'),
     notesInput: document.querySelector('#notes'),
     sun: document.querySelector('.sun'),
-    moon: document.querySelector('.moon')
+    moon: document.querySelector('.moon'),
+    bin: document.querySelector('.bin'),
   }
 
   function appendTasks(title, priority, project) {
@@ -60,6 +62,7 @@ const dom = (function () {
 
     events.publish('taskWrapper', wrapper);
     creator.creator.creatorBg.remove();
+    windown.location.reload();
   }
 
   function appendProject(title, dueDate) {
@@ -74,8 +77,7 @@ const dom = (function () {
     deadline.classList.add('project-deadline');
 
     wrapper.append(projectTitle, deadline);
-    select.projectsSec.insertBefore(wrapper, select.addProjectBtn);
-    
+    select.projectList.append(wrapper);
     creator.creator.creatorBg.remove();
 
     events.publish('getWrapper', wrapper);
@@ -114,21 +116,22 @@ const dom = (function () {
   });
 
   events.subscribe('openTask', events.events, () => {
-    dom.select.descriptionInput.addEventListener('change', task.editDescription);
-    dom.select.deadlineInput.addEventListener('change', task.editDeadline);
-    dom.select.priorityInput.addEventListener('change', task.editPriority);
-    dom.select.notesInput.addEventListener('change', task.editNotes);
-    dom.select.isFinishedInput.addEventListener('change', task.checkFinish);
-  })
+    select.descriptionInput.addEventListener('change', task.editDescription);
+    select.deadlineInput.addEventListener('change', task.editDeadline);
+    select.priorityInput.addEventListener('change', task.editPriority);
+    select.notesInput.addEventListener('change', task.editNotes);
+    select.isFinishedInput.addEventListener('change', task.checkFinish);
+    select.bin.addEventListener('click', task.deleteTask);
+  });
 
   events.subscribe('openProject', events.events, () => {
-    dom.select.descriptionInput.addEventListener('change', project.editDescription);
-    dom.select.deadlineInput.addEventListener('change', project.editDeadline);
-    dom.select.priorityInput.addEventListener('change', project.editPriority);
-    dom.select.notesInput.addEventListener('change', project.editNotes);
-    dom.select.isFinishedInput.addEventListener('change', project.checkFinish);
-  })
-  
+    select.descriptionInput.addEventListener('change', project.editDescription);
+    select.deadlineInput.addEventListener('change', project.editDeadline);
+    select.priorityInput.addEventListener('change', project.editPriority);
+    select.notesInput.addEventListener('change', project.editNotes);
+    select.isFinishedInput.addEventListener('change', project.checkFinish);
+    select.bin.addEventListener('click', project.deleteProject);
+  });
 
   return {
     select,

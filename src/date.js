@@ -76,7 +76,7 @@ const handleDates = (function() {
       events.publish('fullDate', dateString);
     });
 
-    dom.select.todayBtn.addEventListener('click', () => {
+    function openToday() {
       today = date.getUTCDate();
       currentMonth = date.getUTCMonth();
       currentYear = date.getUTCFullYear();
@@ -85,8 +85,11 @@ const handleDates = (function() {
       events.publish('fullDate', dateString);
       dom.select.headSec.textContent = '';
       dom.select.headSec.append(dom.select.dateWrapper);
-    })
+    }
+
+    dom.select.todayBtn.addEventListener('click', openToday)
   })
+
 })();
 
 export default handleDates;

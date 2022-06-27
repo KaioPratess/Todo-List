@@ -24,10 +24,7 @@ const appHandler = (function() {
             dom.select.tasksContainer.textContent = "You don't have any task for today."
         }
       }
-
-      filterDate();
     })
-
 
   // filter array to find inbox tasks/ or tasks without projects
   function isInbox(task) {
@@ -47,7 +44,7 @@ const appHandler = (function() {
     }
   }
 
-  dom.select.inboxBtn.addEventListener('click', filterInbox)
+  dom.select.inboxBtn.addEventListener('click', filterInbox);
 })()
 
 export default appHandler;

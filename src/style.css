@@ -355,8 +355,12 @@ svg:not(.logo) {
   font-size: 3rem;
 }
 
-.project:hover {
+.page-structure.dark .project:hover {
   background-color: #1A1A1A;
+}
+
+.page-structure.light .project:hover {
+  background-color: #F2BF58;
 }
 
 .date-wrapper {
@@ -378,7 +382,6 @@ svg:not(.logo) {
 
 .title {
   font-size: 3rem;
-  margin-bottom: 30px;
 }
 
 .details-container {
@@ -421,6 +424,13 @@ svg:not(.logo) {
   margin-right: 25px;
 }
 
+.detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
 .description,
 .deadline {
   grid-column: 1;
@@ -447,6 +457,8 @@ svg:not(.logo) {
 
   svg {
     fill: black;
+    stroke: black;
+    color: black;
   }
 
   .add-creator-container {
@@ -500,6 +512,7 @@ svg:not(.logo) {
 
 .page-structure.light *:not(.btn) {
   fill: black;
+  stroke: black;
   color: black;
 }
 
@@ -547,6 +560,8 @@ svg:not(.logo) {
 
   svg {
     fill: white;
+    color: white;
+    stroke: white;
   }
 
   .header {

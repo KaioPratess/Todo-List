@@ -1,6 +1,7 @@
 import dom from './dom.js';
 import creator from './creator.js';
 import events from './pubSub.js';
+import date from './date.js';
 
 const handleProjects = (function () {
   class Project {
@@ -45,15 +46,22 @@ const handleProjects = (function () {
 
   function addProject() {
     if(newProject.title !== undefined) {
-      dom.appendProject(newProject.title, newProject.dueDate);
       projects.push(newProject);
       events.publish('projects', newProject);
+      displayProject();
       newProject = new Project;
       creator.resetCreator();
       removeEvents();
     } else {
       alert('Fill in the fields')
     }
+  }
+
+  function displayProject() {
+    dom.select.projectList.textContent = '';
+  projects.forEach((project) => {
+    dom.appendProject(project.title, project.dueDate);
+  })
   }
 
   function cancelAdd() {
@@ -162,7 +170,23 @@ const handleProjects = (function () {
     })
   }
 
-  return {projects, removeEvents, Project, addProject, editDescription, editDeadline, editPriority, editNotes, checkFinish}
+  function deleteProject() {
+    projects.forEach((project) => {
+      if(project.title === dom.select.title.textContent) {
+        const index = projects.indexOf(project);
+        projects.splice(index, 1);
+      }
+      const projectList = document.querySelectorAll('.project');
+      projectList.forEach((p) => {
+        if(p.firstChild.innerText === dom.select.title.textContent) {
+          p.remove();
+        }
+        window.location.reload();
+      })
+    })
+  }
+
+  return {projects, removeEvents, Project, addProject, editDescription, editDeadline, editPriority, editNotes, checkFinish, deleteProject}
 })()
 
 export default handleProjects;
