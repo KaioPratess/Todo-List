@@ -62,7 +62,6 @@ const dom = (function () {
 
     events.publish('taskWrapper', wrapper);
     creator.creator.creatorBg.remove();
-    windown.location.reload();
   }
 
   function appendProject(title, dueDate) {

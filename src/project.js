@@ -48,14 +48,31 @@ const handleProjects = (function () {
     if(newProject.title !== undefined) {
       projects.push(newProject);
       events.publish('projects', newProject);
-      displayProject();
       newProject = new Project;
       creator.resetCreator();
+      displayProject();
       removeEvents();
+      saveToLocalStorage();
     } else {
       alert('Fill in the fields')
     }
   }
+
+  function saveToLocalStorage() {
+    localStorage.setItem('projects', JSON.stringify(projects));
+  }
+
+  function retrieveFromLocalStorage() {
+    const projectArray = JSON.parse(localStorage.getItem('projects'));
+    projectArray.forEach((p) => {
+      projects.push(p);
+    })
+  }
+
+  window.addEventListener('load', () => {
+    retrieveFromLocalStorage();
+    displayProject();
+  })
 
   function displayProject() {
     dom.select.projectList.textContent = '';
@@ -124,6 +141,7 @@ const handleProjects = (function () {
     projects.forEach((project) => {
       if(project.title === dom.select.title.textContent) {
         project.description = dom.select.descriptionInput.value;
+        saveToLocalStorage()
         console.log(projects)
       }
     })
@@ -134,6 +152,7 @@ const handleProjects = (function () {
     projects.forEach((project) => {
       if(project.title === dom.select.title.textContent) {
         project.dueDate = dom.select.deadlineInput.value;
+        saveToLocalStorage()
         console.log(projects)
       }
     })
@@ -143,6 +162,7 @@ const handleProjects = (function () {
     projects.forEach((project) => {
       if(project.title === dom.select.title.textContent) {
         project.priority = dom.select.priorityInput.value;
+        saveToLocalStorage()
         console.log(projects)
       }
     })
@@ -152,6 +172,7 @@ const handleProjects = (function () {
     projects.forEach((project) => {
       if(project.title === dom.select.title.textContent) {
         project.notes = dom.select.notesInput.value;
+        saveToLocalStorage()
         console.log(projects)
       }
     })
@@ -165,6 +186,7 @@ const handleProjects = (function () {
         } else {
             project.isComplete = false;
         }
+        saveToLocalStorage()
         console.log(projects)
       }
     })
@@ -181,6 +203,7 @@ const handleProjects = (function () {
         if(p.firstChild.innerText === dom.select.title.textContent) {
           p.remove();
         }
+        saveToLocalStorage()
         window.location.reload();
       })
     })

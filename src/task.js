@@ -58,6 +58,7 @@ const handleTasks = (function() {
           project.tasks.push(newTask)
         }
       })
+      saveToLocalStorage();
       newTask = new Task;
       creator.resetCreator();
       creator.creator.creatorBg.remove();
@@ -66,6 +67,21 @@ const handleTasks = (function() {
       alert('Fill in the fields')
     }
   }
+
+  function saveToLocalStorage() {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }
+
+  function retrieveFromLocalStorage() {
+    const tasksArray = JSON.parse(localStorage.getItem('tasks'));
+    tasksArray.forEach((task) => {
+      tasks.push(task);
+    })
+  }
+
+  window.addEventListener('load', () => {
+    retrieveFromLocalStorage();
+  })
 
   function cancelAdd() {
     creator.creator.creatorBg.remove();
@@ -119,6 +135,7 @@ const handleTasks = (function() {
     tasks.forEach((task) => {
       if(task.title === dom.select.title.textContent) {
         task.description = dom.select.descriptionInput.value;
+        saveToLocalStorage();
         console.log(tasks)
       }
     })
@@ -128,6 +145,7 @@ const handleTasks = (function() {
     tasks.forEach((task) => {
       if(task.title === dom.select.title.textContent) {
         task.dueDate = dom.select.deadlineInput.value;
+        saveToLocalStorage();
         console.log(tasks)
       }
     })
@@ -137,6 +155,7 @@ const handleTasks = (function() {
     tasks.forEach((task) => {
       if(task.title === dom.select.title.textContent) {
         task.priority = dom.select.priorityInput.value;
+        saveToLocalStorage();
         console.log(tasks)
       }
     })
@@ -146,6 +165,7 @@ const handleTasks = (function() {
     tasks.forEach((task) => {
       if(task.title === dom.select.title.textContent) {
         task.notes = dom.select.notesInput.value;
+        saveToLocalStorage();
         console.log(tasks)
       }
     })
@@ -159,6 +179,7 @@ const handleTasks = (function() {
         } else {
             task.isComplete = false;
         }
+        saveToLocalStorage();
         console.log(tasks)
       }
     })
@@ -169,7 +190,8 @@ const handleTasks = (function() {
       if(task.title === dom.select.title.textContent) {
         const index = tasks.indexOf(task);
         tasks.splice(index, 1);
-        window.location.reload
+        saveToLocalStorage();
+        window.location.reload();
       }
     })
   }

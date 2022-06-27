@@ -24,6 +24,11 @@ const appHandler = (function() {
             dom.select.tasksContainer.textContent = "You don't have any task for today."
         }
       }
+
+      window.addEventListener('load', () => {
+        filterDate()
+      })
+      filterDate()
     })
 
   // filter array to find inbox tasks/ or tasks without projects
