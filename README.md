@@ -1,4 +1,4 @@
-<h1>Todo List</h1>
+<h1><a href="https://kaiopratess.github.io/todo-list/">Todo List</a></h1>
 
 <h2>What is this project about?</h2>
   <p>This project is a todo app, you can use it to organize your tasks by project and by date. Never forget anything!</p>
