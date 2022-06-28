@@ -64,9 +64,11 @@ const handleProjects = (function () {
 
   function retrieveFromLocalStorage() {
     const projectArray = JSON.parse(localStorage.getItem('projects'));
+    if(projectArray !== null) {
     projectArray.forEach((p) => {
       projects.push(p);
-    })
+      events.publish('projects', p)
+    })}
   }
 
   window.addEventListener('load', () => {
@@ -120,16 +122,18 @@ const handleProjects = (function () {
   const projectWrappers = [];
 
   events.subscribe('getWrapper', events.events, (wrapper) => {
+    dom.select.tasksContainer.style.display = 'block';
+    dom.select.checklistDiv.style.display = 'none';
     projectWrappers.push(wrapper);
 
     projectWrappers.forEach((wrapper) => {
       wrapper.addEventListener('click', (event) => {
-        projects.forEach((project) => {
+          projects.forEach((project) => {
           if(event.target.outerText == project.title) {
             dom.openProjectTask(project.title, project.description, project.dueDate, project.priority, project.notes, project.isComplete);
             events.publish('openProject', '');
             project.tasks.forEach((task) => {
-              dom.appendTasks(task.title, task.priority, task.project);
+              dom.appendTasks(task.title, task.priority, task.project, dom.select.tasksContainer);
             })
           }
         })
@@ -209,7 +213,7 @@ const handleProjects = (function () {
     })
   }
 
-  return {projects, removeEvents, Project, addProject, editDescription, editDeadline, editPriority, editNotes, checkFinish, deleteProject}
+  return {projects, removeEvents, Project, addProject, editDescription, editDeadline, editPriority, editNotes, checkFinish, deleteProject, saveToLocalStorage}
 })()
 
 export default handleProjects;

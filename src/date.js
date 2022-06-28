@@ -76,18 +76,17 @@ const handleDates = (function() {
       events.publish('fullDate', dateString);
     });
 
-    function openToday() {
-      today = date.getUTCDate();
-      currentMonth = date.getUTCMonth();
-      currentYear = date.getUTCFullYear();
-      dom.select.date.textContent = `${today} ${month} ${currentYear}`;
-      dateString = `${currentYear}-${('0' + (currentMonth+1)).slice(-2)}-${('0' + today).slice(-2)}`;
-      events.publish('fullDate', dateString);
-      dom.select.headSec.textContent = '';
-      dom.select.headSec.append(dom.select.dateWrapper);
-    }
-
-    dom.select.todayBtn.addEventListener('click', openToday)
+    dom.select.todayBtn.addEventListener('click', () => {
+        today = date.getUTCDate();
+        currentMonth = date.getUTCMonth();
+        currentYear = date.getUTCFullYear();
+        dom.select.date.textContent = `${today} ${month} ${currentYear}`;
+        dateString = `${currentYear}-${('0' + (currentMonth+1)).slice(-2)}-${('0' + today).slice(-2)}`;
+        events.publish('fullDate', dateString);
+        dom.select.headSec.textContent = '';
+        dom.select.dateWrapper.style.display = 'grid';
+        dom.select.headSec.append(dom.select.dateWrapper);
+    })
   })
 
 })();

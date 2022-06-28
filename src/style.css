@@ -63,7 +63,7 @@ svg:not(.logo) {
   height: 156px;
 }
 
-.inbox-title {
+.inbox-title, .done-title {
   font-size: 3rem;
   position: relative;
 }
@@ -369,6 +369,7 @@ svg:not(.logo) {
   justify-content: space-between;
   align-items: center;
   gap: 20px;
+  display: none;
 }
 
 .arrow-backward {
@@ -650,4 +651,40 @@ svg:not(.logo) {
 .sun.active,
 .moon.active {
   display: block;
+}
+
+.checklist {
+  position: relative;
+  display: none;
+  padding: 60px 60px;
+  height: calc(100vh - 330px);
+  overflow: auto;
+}
+
+.checklist-btn {
+  color: black;
+  height: 50px;
+  width: 50px;
+  font-size: 3rem;
+  border-radius: 50%;
+  box-shadow: 1px 1px 2px #fff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: absolute;
+  right: 30px;
+  top: 20px;
+}
+
+.line-bg {
+  width: 80%;
+  position: absolute;
+}
+
+.line {
+  width: 100%;
+  height: 1px;
+  background-color: black;
 }

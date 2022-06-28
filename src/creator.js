@@ -28,7 +28,6 @@ const creator = {
   project: new Image(),
   calendar: new Image(),
   priority: new Image(),
-  checklist: new Image(),
 }
 
 function appendCreator () {
@@ -51,14 +50,12 @@ function appendCreator () {
     creator.project.src = projectBlack;
     creator.calendar.src = calendarBlack;
     creator.priority.src = flagBlack;
-    creator.checklist.src = checklistBlack;
   } else {
       creator.notes.src = notesWhite;
       creator.desc.src = descWhite;
       creator.project.src = projectWhite;
       creator.calendar.src = calendarWhite;
       creator.priority.src = flagWhite;
-      creator.checklist.src = checklistWhite;
   }
 
   creator.cancelBtn.setAttribute('type', 'button');
@@ -86,10 +83,7 @@ function appendCreator () {
   creator.priority.classList.add('icon');
   creator.priority.setAttribute('alt', 'priority');
 
-  creator.checklist.classList.add('icon');
-  creator.checklist.setAttribute('alt', 'checklist');
-
-  creator.creatorProp.append(creator.creatorPropInput, creator.desc, creator.calendar, creator.priority,  creator.notes, creator.project, creator.checklist, creator.cancelBtn, creator.addBtn);
+  creator.creatorProp.append(creator.creatorPropInput, creator.desc, creator.calendar, creator.priority,  creator.notes, creator.project, creator.cancelBtn, creator.addBtn);
   creator.creatorContainer.append(creator.input, creator.creatorProp);
   creator.creatorBg.append(creator.creatorContainer);
   dom.select.pageStructure.append(creator.creatorBg);
@@ -142,7 +136,6 @@ events.subscribe('projects', events.events, (project) => {
         opt.textContent = project.title;
   projects.select.appendChild(opt);
 })
-
 
 const notes = {
   textArea: document.createElement('textarea')

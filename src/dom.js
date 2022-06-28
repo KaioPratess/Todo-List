@@ -12,7 +12,7 @@ const dom = (function () {
     configBtn: document.querySelector('.config'),
     inboxBtn: document.querySelector('.inbox-btn'),
     todayBtn: document.querySelector('.today-btn'),
-    upcomingBtn: document.querySelector('.upcoming-btn'),
+    doneBtn: document.querySelector('.done-btn'),
     projectsSec: document.querySelector('.projects'),
     projectList: document.querySelector('.project-list'),
     addProjectBtn: document.querySelector('.add-project'),
@@ -32,9 +32,12 @@ const dom = (function () {
     sun: document.querySelector('.sun'),
     moon: document.querySelector('.moon'),
     bin: document.querySelector('.bin'),
+    checklistBtn: document.querySelector('.checklist-btn'),
+    checklistDiv: document.querySelector('.checklist'),
+    creatorProp: document.querySelector('.creator-properties'),
   }
 
-  function appendTasks(title, priority, project) {
+  function appendTasks(title, priority, project, append) {
     const wrapper = document.createElement('div');
     const taskTitle = document.createElement('div');
     const para = document.createElement('p');
@@ -58,7 +61,7 @@ const dom = (function () {
 
     taskTitle.append(circle, para);
     wrapper.append(taskTitle, projectTitle);
-    select.tasksContainer.appendChild(wrapper);
+    append.appendChild(wrapper);
 
     events.publish('taskWrapper', wrapper);
     creator.creator.creatorBg.remove();
@@ -81,7 +84,7 @@ const dom = (function () {
 
     events.publish('getWrapper', wrapper);
   }
-
+  
   function openProjectTask(title, description, deadline, priority, notes, isComplete) {
     select.headSec.textContent = '';
     select.details.style.display = 'block';
@@ -106,13 +109,43 @@ const dom = (function () {
     select.headSec.append(inboxTitle);
   }
 
+  function appendDone() {
+    dom.select.tasksContainer.style.display = 'block';
+    dom.select.checklistDiv.style.display = 'none';
+    select.headSec.textContent = '';
+    const doneTitle = document.createElement('h1');
+          doneTitle.classList.add('done-title');
+          doneTitle.textContent = 'Done';
+    select.headSec.append(doneTitle);
+  }
+
   select.themeChangeBtn.addEventListener('click', () => {
     select.pageStructure.classList.toggle('dark');
     select.pageStructure.classList.toggle('light');
+    saveToLocalStorage();
 
     select.sun.classList.toggle('active');
     select.moon.classList.toggle('active');
   });
+
+  function saveToLocalStorage() {
+    localStorage.setItem('theme', select.pageStructure.classList[1]);
+  }
+
+  function retrieveFromLocalStorage() {
+    const theme = localStorage.getItem('theme');
+    if(theme !== null) {
+      if(select.pageStructure.classList[1] === 'dark') {
+        select.pageStructure.classList.replace('dark', theme);
+      } else if(select.pageStructure.classList[1] === 'light') {
+          select.pageStructure.classList.replace('light', theme);
+      }
+  }
+  }
+
+  window.addEventListener('load', () => {
+    retrieveFromLocalStorage();
+  })
 
   events.subscribe('openTask', events.events, () => {
     select.descriptionInput.addEventListener('change', task.editDescription);
@@ -132,12 +165,24 @@ const dom = (function () {
     select.bin.addEventListener('click', project.deleteProject);
   });
 
+  function createLine(container) {
+    const div = document.createElement('div');
+          div.classList.add('line-bg');
+    const line = document.createElement('div');
+          line.classList.add('line');
+
+    div.append(line);
+    container.append(div);
+  }
+
   return {
     select,
     appendTasks,
     appendProject,
     openProjectTask,
     appendInbox,
+    appendDone,
+    createLine
   }
 })();
 
